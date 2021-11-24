@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creatioonTimestamp: null
+  labels:
+    app: httpserver-app
+  name: httpserver-app-service
+  namespace: webapp
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: httpserver-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+
