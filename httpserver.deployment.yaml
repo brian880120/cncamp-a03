@@ -23,7 +23,7 @@ spec:
         app: httpserver-app
     spec:
       containers:
-      - image: brian880120/cncampa03-httpserver:v1
+      - image: brian880120/cncampa03-httpserver:v2
         name: httpserver
         resources:
           limits:
