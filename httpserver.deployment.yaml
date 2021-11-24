@@ -25,10 +25,34 @@ spec:
       containers:
       - image: brian880120/cncampa03-httpserver:v2
         name: httpserver
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          periodSeconds: 10
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
         resources:
           limits:
-            cpu: "500m"
-            memory: "128Mi"
+            cpu: 700m
+            memory: 200Mi
+          requests:
+            cpu: 500m
+            memory: 100Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         ports:
