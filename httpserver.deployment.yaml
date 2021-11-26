@@ -5,7 +5,7 @@ metadata:
   labels:
     app: httpserver-app
   name: httpserver-app
-  namespace: webapp
+  namespace: webservice
 spec:
   replicas: 3
   selector:

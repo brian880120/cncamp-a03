@@ -5,7 +5,7 @@ metadata:
   labels:
     app: httpserver-app
   name: httpserver-app-service
-  namespace: webapp
+  namespace: webservice
 spec:
   ports:
   - port: 80

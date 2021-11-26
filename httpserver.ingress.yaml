@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpserver-app-ingress
+  namespace: webservice
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - httpserver.com
+      secretName: httpserver-tls
+  rules:
+  - host: httpserver.com
+    http:
+      paths:
+        - path: "/"
+          pathType: Prefix
+          backend:
+            service:
+              name: httpserver-app-service
+              port:
+                number: 80
