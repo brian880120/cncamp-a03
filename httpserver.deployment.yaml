@@ -25,10 +25,19 @@ spec:
       containers:
       - image: brian880120/cncampa03-httpserver:v2
         name: httpserver
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: httpserver-config
+              key: PORT
+        volumeMounts:
+        - mountPath: /var/log
+          name: log-volume
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+              command: ["/bin/sh", "-c", "echo Hello from the port: ${PORT} > /usr/share/message"]
         startupProbe:
           httpGet:
             path: /healthz
@@ -58,4 +67,7 @@ spec:
         ports:
         - containerPort: 8080
       restartPolicy: Always
+      volumes:
+      - name: log-volume
+        emptyDir: {}
 status: {}

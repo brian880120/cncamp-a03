@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: httpserver-config
+  namespace: webservice
+data:
+  PORT: "8080"
